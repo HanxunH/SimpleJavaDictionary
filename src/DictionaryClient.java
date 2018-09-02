@@ -1,21 +1,55 @@
+import java.awt.event.ActionEvent;
 import java.util.logging.*;
+
+import javafx.fxml.FXML;
 import org.json.*;
 import java.io.*;
 import java.net.*;
 import javax.net.*;
 import java.util.*;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class DictionaryClient {
+public class DictionaryClient extends Application {
+    /* Initialization */
     private static OrcaLoger logHandler = new OrcaLoger();
     private static Logger loger = logHandler.getLogger();
     private static String defaultAddress = "localhost";
     private static int defaultPort = 6666;
 
-    private class ServerResponse{
+    public class ServerResponse{
         private OrcaDictionary.dictionaryOperation op = null;
         private String op_word = null;
         private String op_word_meaning = null;
         private String operation_status = null;
+
+        public OrcaDictionary.dictionaryOperation getOp() {
+            return op;
+        }
+
+        public String getOp_word() {
+            return op_word;
+        }
+
+        public String getOp_word_meaning() {
+            return op_word_meaning;
+        }
+
+        public String getOperation_status() {
+            return operation_status;
+        }
+
+        public int getResponse_code() {
+            return response_code;
+        }
+
+        public boolean isResponse() {
+            return response;
+        }
+
         private int response_code = 0;
         private boolean response = false;
 
@@ -75,7 +109,7 @@ public class DictionaryClient {
 
     }
 
-    public void OrcaClient(Map<String, String> map) {
+    public ServerResponse OrcaClient(Map<String, String> map) {
         String address = defaultAddress;
         int port = defaultPort;
         try {
@@ -101,15 +135,16 @@ public class DictionaryClient {
             String strInputstream = inputStream.readUTF();
             JSONObject js = new JSONObject(strInputstream);
             ServerResponse sr = new ServerResponse(js);
-            sr.printObject();
+            return sr;
         }
         catch (Exception e) {
             loger.severe(e.getMessage());
         }
+        return null;
     }
 
 
-    public static void clientOperationHandler(OrcaDictionary.dictionaryOperation op, String op_word, String op_word_meaning){
+    public static ServerResponse clientOperationHandler(OrcaDictionary.dictionaryOperation op, String op_word, String op_word_meaning){
         DictionaryClient client = new DictionaryClient();
         Map<String, String> map = new HashMap<String, String>();
         /* Add Operation */
@@ -120,7 +155,6 @@ public class DictionaryClient {
                 map.put("operation","ADD");
                 map.put("op_word", op_word);
                 map.put("op_word_meaning", op_word_meaning);
-                client.OrcaClient(map);
             }
         }
         /* DELETE Operation */
@@ -130,7 +164,6 @@ public class DictionaryClient {
             }else{
                 map.put("operation","DELETE");
                 map.put("op_word", op_word);
-                client.OrcaClient(map);
             }
         }
         /* LOOPUP Operation */
@@ -140,7 +173,6 @@ public class DictionaryClient {
             }else{
                 map.put("operation","LOOKUP");
                 map.put("op_word", op_word);
-                client.OrcaClient(map);
             }
         }
         /* UPDATE Operation */
@@ -151,14 +183,14 @@ public class DictionaryClient {
                 map.put("operation","UPDATE");
                 map.put("op_word", op_word);
                 map.put("op_word_meaning", op_word_meaning);
-                client.OrcaClient(map);
             }
         }
         /* error Test Operation */
         else{
             map.put("operation","test");
-            client.OrcaClient(map);
         }
+        return client.OrcaClient(map);
+
     }
 
     public static boolean checkNextArgumentStatus(String[] args, int i){
@@ -175,6 +207,8 @@ public class DictionaryClient {
         OrcaDictionary.dictionaryOperation op = null;
         String op_word = null;
         String op_word_meaning = null;
+        boolean isGUI = false;
+
         for(int i=0; i<args.length; i++){
             if(args[i].equals("-a")){
                 if(checkNextArgumentStatus(args,i)){
@@ -206,7 +240,25 @@ public class DictionaryClient {
                     }
                 }
             }
+            if(args[i].equals("-gui")){
+                isGUI = true;
+                launch(args);
+            }
         }
-        clientOperationHandler(op,op_word,op_word_meaning);
+        if(!isGUI){
+            clientOperationHandler(op,op_word,op_word_meaning);
+        }
     }
+
+    /* JAVAFX */
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("DictionaryClient.fxml"));
+        primaryStage.setTitle("DictionaryClient");
+        primaryStage.setScene(new Scene(root, 600, 365));
+        primaryStage.setResizable(false);
+        primaryStage.show();
+    }
+
+
 }
