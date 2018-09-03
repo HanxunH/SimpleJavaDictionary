@@ -125,19 +125,25 @@ public class DictionaryClientGUIConrtoller {
         this.response_TextArea.clear();
         String text = "";
         if(sr.getOperation_status() != null){
-            text = "Status: " + sr.getOperation_status() + "\n";
+            text = "Operation_Status: " + sr.getOperation_status() + "\n";
         }
-        text = text + "ResponseCode: " + sr.getResponse_code() + "\n";
+        text = text + "Response_Code: " + sr.getResponse_code() + "\n";
         if(sr.getOp() != null){
             text = text + "Operation: " + OrcaDictionary.dictionaryOperation.getString(sr.getOp()) + "\n";
         }
+        if(sr.getError_message() != null){
+            text = text + "Error_Message: " + sr.getError_message() + "\n";
+        }
         if(sr.getOp_word() != null){
-            text = text + "Word: " + sr.getOp_word() + "\n";
+            text = text + "Operation_Word: " + sr.getOp_word() + "\n";
         }
         if(sr.getOp_word_meaning() != null){
-            text = text + "Word Meaning: " + sr.getOp_word_meaning() + "\n";
+            text = text + "Word_Meaning: " + sr.getOp_word_meaning() + "\n";
         }
         this.response_TextArea.appendText(text);
+        if(sr.getResponse_code() != 200){
+            showAlert(AlertType.WARNING,"OrcaDictionaryClient",OrcaDictionary.dictionaryOperation.getString(sr.getOp()),sr.getError_message());
+        }
     }
 
     private void set_operation_words(){

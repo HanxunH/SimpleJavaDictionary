@@ -56,8 +56,12 @@ public class OrcaDictionary {
         dictionary.put(word,meaning);
     }
 
-    public void delete(String word){
-        dictionary.remove(word);
+    public boolean delete(String word){
+        if(dictionary.containsKey(word)){
+            dictionary.remove(word);
+            return true;
+        }
+        return false;
     }
 
     public void update(String word, String meaning){
@@ -65,7 +69,10 @@ public class OrcaDictionary {
     }
 
     public String lookUp(String word){
-        return dictionary.get(word);
+        if(dictionary.containsKey(word)){
+            return dictionary.get(word);
+        }
+        return null;
     }
 
     public void saveToFile(){

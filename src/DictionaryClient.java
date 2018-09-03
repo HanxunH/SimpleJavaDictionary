@@ -25,6 +25,13 @@ public class DictionaryClient extends Application {
         private String op_word = null;
         private String op_word_meaning = null;
         private String operation_status = null;
+        private int response_code = 0;
+        private boolean response = false;
+        private String error_message = null;
+
+        public String getError_message() {
+            return error_message;
+        }
 
         public OrcaDictionary.dictionaryOperation getOp() {
             return op;
@@ -49,9 +56,6 @@ public class DictionaryClient extends Application {
         public boolean isResponse() {
             return response;
         }
-
-        private int response_code = 0;
-        private boolean response = false;
 
         public ServerResponse(JSONObject js){
             if(js.has("response")){
@@ -92,6 +96,13 @@ public class DictionaryClient extends Application {
             if(js.has("operation_status")){
                 try {
                     operation_status = js.getString("operation_status");
+                }catch (Exception e){
+                    loger.severe(e.getMessage());
+                }
+            }
+            if(js.has("error_message")){
+                try {
+                    error_message = js.getString("error_message");
                 }catch (Exception e){
                     loger.severe(e.getMessage());
                 }

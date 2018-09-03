@@ -60,6 +60,8 @@ public class DictionaryServer{
                 synchronized(dictionary)
                 {
                     dictionary.add(op_word,op_word_meaning);
+                    map.put("response","true");
+                    map.put("response_code","200");
                     map.put("operation","ADD");
                     map.put("operation_status","success");
                     map.put("op_word",op_word);
@@ -71,26 +73,47 @@ public class DictionaryServer{
 
                 synchronized(dictionary)
                 {
-                    dictionary.delete(op_word);
+                    if(dictionary.delete(op_word)){
+                        map.put("response_code","200");
+                        map.put("operation_status","success");
+                    }else{
+                        map.put("response_code","404");
+                        map.put("operation_status","error");
+                        map.put("error_message","No such word \""+ op_word + "\" in the dictionary!");
+                    }
+                    map.put("response","true");
                     map.put("operation","DELETE");
                     map.put("op_word",op_word);
-                    map.put("operation_status","success");
                     dictionary.saveToFile();
                 }
 
             }else if(op == OrcaDictionary.dictionaryOperation.LOOKUP){
 
                 String meaning = dictionary.lookUp(op_word);
-                map.put("operation","LOOKUP");
-                map.put("operation_status","success");
-                map.put("op_word",op_word);
-                map.put("op_word_meaning",meaning);
+                if(meaning == null){
+                    map.put("response","true");
+                    map.put("response_code","404");
+                    map.put("operation","LOOKUP");
+                    map.put("operation_status","Error");
+                    map.put("error_message","No such word \""+ op_word + "\" in the dictionary!");
+                    map.put("op_word",op_word);
+                    map.put("op_word_meaning",meaning);
+                }else{
+                    map.put("response","true");
+                    map.put("response_code","200");
+                    map.put("operation","LOOKUP");
+                    map.put("operation_status","success");
+                    map.put("op_word",op_word);
+                    map.put("op_word_meaning",meaning);
+                }
 
             }else if(op == OrcaDictionary.dictionaryOperation.UPDATE){
 
                 synchronized(dictionary)
                 {
                     dictionary.add(op_word,op_word_meaning);
+                    map.put("response","true");
+                    map.put("response_code","200");
                     map.put("operation","UPDATE");
                     map.put("operation_status","success");
                     map.put("op_word",op_word);
@@ -99,6 +122,8 @@ public class DictionaryServer{
                 }
 
             }else if(op == OrcaDictionary.dictionaryOperation.TEST){
+                map.put("response","true");
+                map.put("response_code","200");
                 map.put("operation","TEST");
                 map.put("operation_status","success");
             }
@@ -132,8 +157,6 @@ public class DictionaryServer{
                 OrcaDictionary.dictionaryOperation op = null;
                 op = OrcaDictionary.dictionaryOperation.getType(operation);
                 Map<String, String> return_map = new HashMap<String, String>();
-                return_map.put("response","true");
-                return_map.put("response_code","200");
                 this.OrcaDictionaryHandler(return_map,op,op_word,op_word_meaning);
                 json = new JSONObject(return_map);
                 String jsonString = json.toString();
