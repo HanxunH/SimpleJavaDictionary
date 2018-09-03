@@ -158,8 +158,6 @@ public class DictionaryServer extends Application{
                 String strInputstream = new String(data.toByteArray());
                 socket.shutdownInput();
                 data.close();
-                Thread.currentThread().sleep(10000);
-
                 /* JSON Parsing */
                 JSONObject json = new JSONObject(strInputstream);
                 String op_word = null;

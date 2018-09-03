@@ -1,0 +1,15 @@
+[2018/09/04-09:35:21][INFO] :Server started on port: 6666
+[2018/09/04-09:35:26][INFO] :Client ID: 0 accepted
+[2018/09/04-09:35:26][INFO] :File Saved
+[2018/09/04-09:35:26][INFO] :Responding to ClientID(0) JSON: {"response_code":"200","response":"true","operation_status":"success","op_word":"word","operation":"DELETE"}
+[2018/09/04-09:35:26][INFO] :ClientID(0) Close Client
+[2018/09/04-09:36:03][INFO] :Client ID: 0 accepted
+[2018/09/04-09:36:03][INFO] :File Saved
+[2018/09/04-09:36:03][INFO] :Responding to ClientID(0) JSON: {"error_message":"No such word \"word\" in the dictionary!","response_code":"404","response":"true","operation_status":"error","op_word":"word","operation":"DELETE"}
+[2018/09/04-09:36:03][INFO] :ClientID(0) Close Client
+[2018/09/04-09:36:11][INFO] :Client ID: 0 accepted
+[2018/09/04-09:36:11][INFO] :Responding to ClientID(0) JSON: {"error_message":"No such word \"word\" in the dictionary!","response_code":"404","response":"true","operation_status":"Error","op_word":"word","operation":"LOOKUP"}
+[2018/09/04-09:36:11][INFO] :ClientID(0) Close Client
+[2018/09/04-09:36:33][INFO] :Client ID: 0 accepted
+[2018/09/04-09:36:33][INFO] :Responding to ClientID(0) JSON: {"error_message":"No such word \"word\" in the dictionary!","response_code":"404","response":"true","operation_status":"Error","op_word":"word","operation":"LOOKUP"}
+[2018/09/04-09:36:33][INFO] :ClientID(0) Close Client

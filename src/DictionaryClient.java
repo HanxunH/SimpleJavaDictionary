@@ -1,6 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.util.logging.*;
 
+import com.sun.security.ntlm.Server;
 import javafx.fxml.FXML;
 import org.json.*;
 import java.io.*;
@@ -22,6 +23,8 @@ public class DictionaryClient extends Application {
     private static int defaultPort = 6666;
     public static final String version_String = "V 1.01";
     public static final String author_String = "HanxunHuang(LemonBear)\n" + "https://github.com/HanxunHuangLemonBear";
+    private static int deleyMillSec = 0;
+    private static boolean isTesting = false;
 
     public static String getDefaultAddress() {
         return defaultAddress;
@@ -152,7 +155,9 @@ public class DictionaryClient extends Application {
             JSONObject json = new JSONObject(map);
             String jsonString = json.toString();
             loger.info(jsonString);
-
+            if(isTesting){
+                Thread.currentThread().sleep(deleyMillSec);
+            }
             /* Send To Server*/
             byte[] jsonByte = jsonString.getBytes();
             DataOutputStream outputStream = null;
@@ -260,6 +265,12 @@ public class DictionaryClient extends Application {
         boolean isGUI = false;
 
         for(int i=0; i<args.length; i++){
+            if(args[i].equals("-test")){
+                if(checkNextArgumentStatus(args,i)){
+                    isTesting = true;
+                    deleyMillSec = Integer.valueOf(args[i+1]);
+                }
+            }
             if(args[i].equals("-a")){
                 if(checkNextArgumentStatus(args,i)){
                     defaultAddress = args[i+1];
@@ -302,7 +313,12 @@ public class DictionaryClient extends Application {
         }
         if(!isGUI){
             try{
-                clientOperationHandler(op,op_word,op_word_meaning);
+                ServerResponse sr = clientOperationHandler(op,op_word,op_word_meaning);
+                if(sr.getResponse_code() != 200){
+                    loger.warning("Status: " + sr.operation_status + " -Message: " + sr.getError_message());
+                }else{
+                    loger.info("Status: " + sr.operation_status + " -Operation: " + OrcaDictionary.dictionaryOperation.getString(op)+ " -Word: " + op_word + " -Meaning: " + op_word_meaning);
+                }
             }catch (Exception e){
                 loger.severe(e.getMessage());
             }
