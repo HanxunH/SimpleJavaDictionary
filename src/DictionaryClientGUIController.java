@@ -9,7 +9,7 @@ import tray.notification.*;
 import java.util.Optional;
 
 
-public class DictionaryClientGUIConrtoller {
+public class DictionaryClientGUIController {
 
     @FXML
     private TextField op_word_TextField;

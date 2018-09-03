@@ -3,9 +3,15 @@ import java.net.*;
 import javax.net.*;
 import java.util.logging.*;
 import org.json.*;
+import org.json.simple.parser.JSONParser;
 import java.util.*;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class DictionaryServer{
+public class DictionaryServer extends Application{
 
     // Default Number
     private static int defaultPort = 6666;
@@ -16,6 +22,16 @@ public class DictionaryServer{
     private static DictionaryServer server = new DictionaryServer();
     private static OrcaDictionary dictionary = new OrcaDictionary();
     private static final Object syncObject = new Object();
+    public static final String version_String = "V 1.01";
+    public static final String author_String = "HanxunHuang(LemonBear)\n" + "https://github.com/HanxunHuangLemonBear";
+
+    public static ServerSocket getServerSocket() {
+        return serverSocket;
+    }
+
+    public static synchronized int getUserCounter() {
+        return userCounter;
+    }
 
     public static synchronized void updateUserCounter(int counter){
         userCounter = counter;
@@ -25,7 +41,7 @@ public class DictionaryServer{
         try
         {
             serverSocket = new ServerSocket(port);
-            loger.info("Server started");
+            loger.info("Server started on port: " + String.valueOf(port));
             while(true) {
                 Socket socket = serverSocket.accept();
                 loger.info("Client ID: " + String.valueOf(userCounter) +" accepted");
@@ -40,7 +56,7 @@ public class DictionaryServer{
         }
     }
 
-    private class OrcaServerRequestHandlerThread implements Runnable {
+    public class OrcaServerRequestHandlerThread implements Runnable {
         private Socket socket;
         private int clientID;
 
@@ -142,6 +158,7 @@ public class DictionaryServer{
                 String strInputstream = new String(data.toByteArray());
                 socket.shutdownInput();
                 data.close();
+                Thread.currentThread().sleep(10000);
 
                 /* JSON Parsing */
                 JSONObject json = new JSONObject(strInputstream);
@@ -186,11 +203,60 @@ public class DictionaryServer{
 
     }
 
+
+    public static boolean checkNextArgumentStatus(String[] args, int i){
+        if(i+1<args.length && args[i+1] == null){
+            loger.severe("Bad argument, Check Manual!");
+            return false;
+        }
+        return true;
+    }
+
+    public static void setServerBaseOnConfig(String filePath){
+        try {
+            JSONParser parser = new JSONParser();
+            Object obj = parser.parse(new FileReader(filePath));
+            JSONObject jsonObject = (JSONObject) obj;
+            if(jsonObject.has("server_port")){
+                defaultPort = jsonObject.getInt("server_port");
+            }
+        }catch (Exception e){
+            loger.severe(e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
-        loger.info("Starting the Server ...");
-        server.OrcaServer(defaultPort);
+        boolean isGUI = false;
+        for(int i=0; i<args.length; i++){
+            if(args[i].equals("-config")){
+                if(checkNextArgumentStatus(args,i)){
+                    setServerBaseOnConfig(args[i+1]);
+                }
+            }
+            if(args[i].equals("-p")){
+                if(checkNextArgumentStatus(args,i)){
+                    defaultPort = Integer.parseInt(args[i+1]);
+                }
+            }
+            if(args[i].equals("-gui")){
+                isGUI = true;
+                launch(args);
+            }
+        }
+        if(!isGUI){
+            loger.info("Starting the Server ...");
+            server.OrcaServer(defaultPort);
+        }
     }
 
 
-
+    /* JAVAFX */
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("DictionaryServer.fxml"));
+        primaryStage.setTitle("DictionaryServer");
+        primaryStage.setScene(new Scene(root, 600, 365));
+        primaryStage.setResizable(false);
+        primaryStage.show();
+    }
 }
