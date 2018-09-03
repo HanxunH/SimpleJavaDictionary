@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.json.simple.parser.JSONParser;
 
 public class DictionaryClient extends Application {
     /* Initialization */
@@ -19,8 +20,24 @@ public class DictionaryClient extends Application {
     private static Logger loger = logHandler.getLogger();
     private static String defaultAddress = "localhost";
     private static int defaultPort = 6666;
-    public static final String version_String = "V 1.0";
+    public static final String version_String = "V 1.01";
     public static final String author_String = "HanxunHuang(LemonBear)\n" + "https://github.com/HanxunHuangLemonBear";
+
+    public static String getDefaultAddress() {
+        return defaultAddress;
+    }
+
+    public static void setDefaultAddress(String defaultAddress) {
+        DictionaryClient.defaultAddress = defaultAddress;
+    }
+
+    public static int getDefaultPort() {
+        return defaultPort;
+    }
+
+    public static void setDefaultPort(int defaultPort) {
+        DictionaryClient.defaultPort = defaultPort;
+    }
 
     public class ServerResponse{
         private OrcaDictionary.dictionaryOperation op = null;
@@ -125,6 +142,7 @@ public class DictionaryClient extends Application {
     public ServerResponse OrcaClient(Map<String, String> map) throws Exception{
         String address = defaultAddress;
         int port = defaultPort;
+        loger.info("OrcaClient Started, Server Address: " + address + " Port: "+ String.valueOf(port));
         try {
             /* Connect with Server */
             Socket socket = new Socket(address, port);
@@ -217,6 +235,22 @@ public class DictionaryClient extends Application {
         return true;
     }
 
+    public static void setClientBaseOnConfig(String filePath){
+        try {
+            JSONParser parser = new JSONParser();
+            Object obj = parser.parse(new FileReader(filePath));
+            JSONObject jsonObject = (JSONObject) obj;
+            if(jsonObject.has("server_address")){
+                defaultAddress = (String) jsonObject.get("server_address");
+            }
+            if(jsonObject.has("server_port")){
+                defaultPort = jsonObject.getInt("server_port");
+            }
+        }catch (Exception e){
+            loger.severe(e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         String address = defaultAddress;
         int port = defaultPort;
@@ -234,6 +268,11 @@ public class DictionaryClient extends Application {
             if(args[i].equals("-p")){
                 if(checkNextArgumentStatus(args,i)){
                     defaultPort = Integer.parseInt(args[i+1]);
+                }
+            }
+            if(args[i].equals("-config")){
+                if(checkNextArgumentStatus(args,i)){
+                    setClientBaseOnConfig(args[i+1]);
                 }
             }
             if(args[i].equals("-o")){

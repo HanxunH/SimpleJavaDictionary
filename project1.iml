@@ -10,5 +10,6 @@
     <orderEntry type="library" name="java-json" level="project" />
     <orderEntry type="library" name="TrayNotification" level="project" />
     <orderEntry type="library" name="Enzo-0.3.6" level="project" />
+    <orderEntry type="library" name="json-simple-1.1.1" level="project" />
   </component>
 </module>
