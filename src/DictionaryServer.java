@@ -73,6 +73,7 @@ public class DictionaryServer{
                 {
                     dictionary.delete(op_word);
                     map.put("operation","DELETE");
+                    map.put("op_word",op_word);
                     map.put("operation_status","success");
                     dictionary.saveToFile();
                 }

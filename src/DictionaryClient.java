@@ -109,7 +109,7 @@ public class DictionaryClient extends Application {
 
     }
 
-    public ServerResponse OrcaClient(Map<String, String> map) {
+    public ServerResponse OrcaClient(Map<String, String> map) throws Exception{
         String address = defaultAddress;
         int port = defaultPort;
         try {
@@ -139,12 +139,12 @@ public class DictionaryClient extends Application {
         }
         catch (Exception e) {
             loger.severe(e.getMessage());
+            throw e;
         }
-        return null;
     }
 
 
-    public static ServerResponse clientOperationHandler(OrcaDictionary.dictionaryOperation op, String op_word, String op_word_meaning){
+    public static ServerResponse clientOperationHandler(OrcaDictionary.dictionaryOperation op, String op_word, String op_word_meaning) throws Exception{
         DictionaryClient client = new DictionaryClient();
         Map<String, String> map = new HashMap<String, String>();
         /* Add Operation */
@@ -189,8 +189,11 @@ public class DictionaryClient extends Application {
         else{
             map.put("operation","test");
         }
-        return client.OrcaClient(map);
-
+        try{
+            return client.OrcaClient(map);
+        }catch (Exception e){
+            throw e;
+        }
     }
 
     public static boolean checkNextArgumentStatus(String[] args, int i){
@@ -246,7 +249,11 @@ public class DictionaryClient extends Application {
             }
         }
         if(!isGUI){
-            clientOperationHandler(op,op_word,op_word_meaning);
+            try{
+                clientOperationHandler(op,op_word,op_word_meaning);
+            }catch (Exception e){
+                loger.severe(e.getMessage());
+            }
         }
     }
 

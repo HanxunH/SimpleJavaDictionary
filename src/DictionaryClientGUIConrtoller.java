@@ -1,7 +1,13 @@
-import com.sun.security.ntlm.Server;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.event.*;
+import tray.animations.AnimationType;
+import tray.notification.*;
+
+import java.util.Optional;
+
 
 public class DictionaryClientGUIConrtoller {
 
@@ -28,6 +34,7 @@ public class DictionaryClientGUIConrtoller {
     private OrcaDictionary.dictionaryOperation op = null;
     private String op_word = null;
     private String op_word_meaning = null;
+    private DictionaryClient.ServerResponse sr = null;
 
     @FXML
     public void menuItem_exit_Action(ActionEvent event){
@@ -44,19 +51,27 @@ public class DictionaryClientGUIConrtoller {
     public void test_connection_Button_Action(ActionEvent event){
         op = OrcaDictionary.dictionaryOperation.TEST;
         set_operation_words();
-        client.clientOperationHandler(op,op_word,op_word_meaning);
+        try{
+            sr = client.clientOperationHandler(op,op_word,op_word_meaning);
+            showAlert(AlertType.INFORMATION,"OrcaDictionaryClient","Server Connected","Success!");
+        }catch (Exception e){
+            showAlert(AlertType.ERROR,"OrcaDictionaryClient","Server Error",e.getMessage());
+        }
     }
 
     @FXML
     public void add_Button_Action(ActionEvent event){
         op = OrcaDictionary.dictionaryOperation.ADD;
         set_operation_words();
-        DictionaryClient.ServerResponse sr = null;
-        if(op_word!=null && !op_word.equals("") && op_word_meaning!=null){
-            sr = client.clientOperationHandler(op,op_word,op_word_meaning);
-            clearUI();
-        }else{
+        if(op_word!=null && op_word.equals("")==false && op_word_meaning!=null && op_word_meaning.equals("")==false){
+            try{
+                sr = client.clientOperationHandler(op,op_word,op_word_meaning);
+            }catch (Exception e){
+                showAlert(AlertType.ERROR,"OrcaDictionaryClient","Server Error",e.getMessage());
+            }
 
+        }else{
+            showAlert(AlertType.WARNING,"OrcaDictionaryClient","TextFiled and TextArea are Empty","ADD: Please input a word and its meaning.");
         }
     }
 
@@ -64,12 +79,15 @@ public class DictionaryClientGUIConrtoller {
     public void delete_Button_Action(ActionEvent event){
         op = OrcaDictionary.dictionaryOperation.DELETE;
         set_operation_words();
-        DictionaryClient.ServerResponse sr = null;
-        if(op_word!=null){
-            sr = client.clientOperationHandler(op,op_word,op_word_meaning);
-            updateUIBaseOnServerResponse(sr);
+        if(op_word!=null&& !op_word.equals("")){
+            try{
+                sr = client.clientOperationHandler(op,op_word,op_word_meaning);
+                updateUIBaseOnServerResponse(sr);
+            }catch (Exception e){
+                showAlert(AlertType.ERROR,"OrcaDictionaryClient","Server Error",e.getMessage());
+            }
         }else{
-
+            showAlert(AlertType.WARNING,"OrcaDictionaryClient","TextFiled is Empty","DELETE: Please input a word.");
         }
     }
 
@@ -78,11 +96,15 @@ public class DictionaryClientGUIConrtoller {
         op = OrcaDictionary.dictionaryOperation.LOOKUP;
         set_operation_words();
         DictionaryClient.ServerResponse sr = null;
-        if(op_word!=null){
-            sr = client.clientOperationHandler(op,op_word,op_word_meaning);
-            updateUIBaseOnServerResponse(sr);
+        if(op_word!=null && !op_word.equals("")){
+            try{
+                sr = client.clientOperationHandler(op,op_word,op_word_meaning);
+                updateUIBaseOnServerResponse(sr);
+            }catch (Exception e){
+                showAlert(AlertType.ERROR,"OrcaDictionaryClient","Server Error",e.getMessage());
+            }
         }else{
-
+            showAlert(AlertType.WARNING,"OrcaDictionaryClient","TextFiled Filed is Empty","SEARCH: Please input a word.");
         }
     }
 
@@ -129,5 +151,12 @@ public class DictionaryClientGUIConrtoller {
         this.response_TextArea.clear();
     }
 
+    private void showAlert(AlertType type, String title, String header, String message){
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
 }

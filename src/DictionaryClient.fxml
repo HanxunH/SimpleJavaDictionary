@@ -25,44 +25,59 @@
          <children>
             <Button fx:id="search_Button" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#search_Button_Action" prefHeight="48.0" prefWidth="168.0" text="Search">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Apple SD GothicNeo ExtraBold" size="15.0" />
                </font>
             </Button>
             <Button fx:id="add_Button" layoutX="14.0" layoutY="144.0" mnemonicParsing="false" onAction="#add_Button_Action" prefHeight="48.0" prefWidth="168.0" text="Add">
                <font>
-                  <Font name="System Bold Italic" size="15.0" />
+                  <Font name="Apple SD GothicNeo ExtraBold" size="15.0" />
                </font>
             </Button>
             <Button fx:id="delete_Button" layoutX="14.0" layoutY="79.0" mnemonicParsing="false" onAction="#delete_Button_Action" prefHeight="48.0" prefWidth="168.0" text="Delete">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Apple SD GothicNeo ExtraBold" size="15.0" />
                </font>
             </Button>
             <Button fx:id="test_connection_Button" layoutX="14.0" layoutY="205.0" mnemonicParsing="false" onAction="#test_connection_Button_Action" prefHeight="48.0" prefWidth="168.0" text="Test Connection">
                <font>
-                  <Font name="System Bold" size="15.0" />
+                  <Font name="Apple SD GothicNeo ExtraBold" size="15.0" />
                </font>
             </Button>
             <Button fx:id="clear_Button" layoutX="14.0" layoutY="267.0" mnemonicParsing="false" onAction="#clear_Button_Action" prefHeight="48.0" prefWidth="168.0" text="Clear">
                <font>
-                  <Font name="System Bold" size="15.0" />
+                  <Font name="Apple SD GothicNeo ExtraBold" size="15.0" />
                </font>
             </Button>
          </children>
       </Pane>
       <Pane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0">
          <children>
-            <TextField fx:id="op_word_TextField" layoutX="14.0" layoutY="27.0" prefHeight="48.0" prefWidth="368.0" text="Query Wrod">
+            <TextField fx:id="op_word_TextField" layoutX="16.0" layoutY="36.0" prefHeight="31.0" prefWidth="367.0">
                <font>
-                  <Font size="20.0" />
+                  <Font name="Apple SD GothicNeo ExtraBold" size="18.0" />
                </font>
             </TextField>
-            <TextArea fx:id="op_word_meaning_TextArea" layoutX="14.0" layoutY="89.0" prefHeight="130.0" prefWidth="368.0" text="Query Word Meaning">
+            <TextArea fx:id="op_word_meaning_TextArea" layoutX="16.0" layoutY="104.0" prefHeight="111.0" prefWidth="368.0" text="&#10;">
                <font>
-                  <Font size="20.0" />
+                  <Font name="Apple SD GothicNeo ExtraBold" size="18.0" />
                </font>
             </TextArea>
-            <TextArea fx:id="response_TextArea" editable="false" layoutX="14.0" layoutY="235.0" prefHeight="91.0" prefWidth="368.0" />
+            <TextArea fx:id="response_TextArea" editable="false" layoutX="14.0" layoutY="241.0" prefHeight="85.0" prefWidth="368.0" />
+            <Label layoutX="20.0" layoutY="12.0" prefHeight="18.0" prefWidth="118.0" text="Word:">
+               <font>
+                  <Font name="Apple SD GothicNeo ExtraBold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="82.0" prefHeight="17.0" prefWidth="112.0" text="Defination:">
+               <font>
+                  <Font name="Apple SD GothicNeo ExtraBold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="22.0" layoutY="222.0" prefHeight="17.0" prefWidth="112.0" text="Server Response: ">
+               <font>
+                  <Font name="Apple SD GothicNeo ExtraBold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
