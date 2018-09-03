@@ -20,6 +20,8 @@ public class DictionaryClientGUIConrtoller {
     @FXML
     private MenuItem menuItem_exit;
     @FXML
+    private MenuItem menuItem_version;
+    @FXML
     private Button search_Button;
     @FXML
     private Button delete_Button;
@@ -39,6 +41,11 @@ public class DictionaryClientGUIConrtoller {
     @FXML
     public void menuItem_exit_Action(ActionEvent event){
         System.exit(0);
+    }
+
+    @FXML
+    public void menuItem_version_Action(ActionEvent event){
+        showAlert(AlertType.INFORMATION,"OrcaDictionaryClient", client.version_String,client.author_String);
     }
 
 

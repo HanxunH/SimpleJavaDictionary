@@ -19,6 +19,8 @@ public class DictionaryClient extends Application {
     private static Logger loger = logHandler.getLogger();
     private static String defaultAddress = "localhost";
     private static int defaultPort = 6666;
+    public static final String version_String = "V 1.0";
+    public static final String author_String = "HanxunHuang(LemonBear)\n" + "https://github.com/HanxunHuangLemonBear";
 
     public class ServerResponse{
         private OrcaDictionary.dictionaryOperation op = null;

@@ -16,6 +16,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="OrcaDictionary">
             <items>
+                  <MenuItem fx:id="menuItem_version" mnemonicParsing="false" onAction="#menuItem_version_Action" text="Version" />
               <MenuItem fx:id="menuItem_exit" mnemonicParsing="false" onAction="#menuItem_exit_Action" text="Quit" />
             </items>
           </Menu>
