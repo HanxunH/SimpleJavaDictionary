@@ -185,7 +185,7 @@ public class DictionaryClient extends Application {
         Map<String, String> map = new HashMap<String, String>();
         /* Add Operation */
         if(op == OrcaDictionary.dictionaryOperation.ADD){
-            if(op_word==null && op_word_meaning==null && !op_word.equals("") && !op_word_meaning.equals("")){
+            if(op_word==null && op_word_meaning==null){
                 loger.severe("Not enough arguments for Add operation");
             }else{
                 map.put("operation","ADD");

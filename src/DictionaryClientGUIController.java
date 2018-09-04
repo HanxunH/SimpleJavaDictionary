@@ -70,13 +70,14 @@ public class DictionaryClientGUIController {
     public void add_Button_Action(ActionEvent event){
         op = OrcaDictionary.dictionaryOperation.ADD;
         set_operation_words();
-        if(op_word!=null && op_word.equals("")==false && op_word_meaning!=null && op_word_meaning.equals("")==false){
+        if(op_word!=null && !op_word.equals("") && op_word_meaning!=null && !op_word_meaning.equals("")){
             try{
                 sr = client.clientOperationHandler(op,op_word,op_word_meaning);
+                updateUIBaseOnServerResponse(sr);
+                showAlert(AlertType.INFORMATION,"OrcaDictionaryClient","Operation: ADD", sr.getOp_word() + ": " + sr.getOp_word_meaning());
             }catch (Exception e){
                 showAlert(AlertType.ERROR,"OrcaDictionaryClient","Server Error",e.getMessage());
             }
-
         }else{
             showAlert(AlertType.WARNING,"OrcaDictionaryClient","TextFiled and TextArea are Empty","ADD: Please input a word and its meaning.");
         }

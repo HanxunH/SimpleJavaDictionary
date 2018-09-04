@@ -58,7 +58,7 @@
                   <Font name="Apple SD GothicNeo ExtraBold" size="18.0" />
                </font>
             </TextField>
-            <TextArea fx:id="op_word_meaning_TextArea" layoutX="16.0" layoutY="104.0" prefHeight="111.0" prefWidth="368.0" text="&#10;">
+            <TextArea fx:id="op_word_meaning_TextArea" layoutX="16.0" layoutY="104.0" prefHeight="111.0" prefWidth="368.0">
                <font>
                   <Font name="Apple SD GothicNeo ExtraBold" size="18.0" />
                </font>
