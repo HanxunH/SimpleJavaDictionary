@@ -2,18 +2,24 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
+      <artifact name="project1Client" />
       <artifact name="project1Server" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17928e15-87b5-4aa4-869e-f179e1ebce2a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project1/DictionaryClient$ServerResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project1/DictionaryClient$ServerResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/project1Client/project1Client.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/project1Client/project1Client.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/project1Server/project1Server.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/project1Server/project1Server.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/project1/DictionaryClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project1/DictionaryClient.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/project1/DictionaryServer$OrcaServerRequestHandlerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project1/DictionaryServer$OrcaServerRequestHandlerThread.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/project1/DictionaryServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project1/DictionaryServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project1/OrcaDictionary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project1/OrcaDictionary.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.log.lck" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DictionaryClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DictionaryClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DictionaryServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DictionaryServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OrcaDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OrcaDictionary.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -64,14 +70,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="fxml" value="32" />
-          <entry key="java" value="12153" />
+          <entry key="java" value="12530" />
           <entry key="json" value="64" />
           <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="12153" />
+          <entry key="JAVA" value="12530" />
           <entry key="JSON" value="64" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="XML" value="32" />
@@ -96,8 +102,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/OrcaDictionary.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-243">
-              <caret line="30" column="33" lean-forward="true" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
+            <state relative-caret-position="308">
+              <caret line="46" column="34" lean-forward="true" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2019#2020#0" expanded="true" />
@@ -110,8 +116,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DictionaryClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="319" column="159" selection-start-line="319" selection-start-column="159" selection-end-line="319" selection-end-column="159" />
+            <state relative-caret-position="151">
+              <caret line="187" column="105" lean-forward="true" selection-start-line="187" selection-start-column="105" selection-end-line="187" selection-end-column="105" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#895#896#0" expanded="true" />
@@ -132,8 +138,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DictionaryServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="891">
-              <caret line="65" column="37" lean-forward="true" selection-start-line="65" selection-start-column="37" selection-end-line="65" selection-end-column="37" />
+            <state relative-caret-position="204">
+              <caret line="242" column="87" selection-start-line="242" selection-start-column="87" selection-end-line="242" selection-end-column="87" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1070#1071#0" expanded="true" />
@@ -150,8 +156,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DictionaryServerGUIController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="44" column="39" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="39" />
+            <state relative-caret-position="352">
+              <caret line="171" column="35" selection-start-line="171" selection-end-line="172" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#527#528#0" expanded="true" />
@@ -233,7 +239,17 @@
       <find>OrcaServerRequestHandlerThread</find>
       <find>logHandlerlogHandler</find>
       <find>setPortNumber</find>
+      <find>setServerBaseOnConfig</find>
+      <find>exist</find>
+      <find>checkNextArgumentStatus</find>
+      <find>Bad argument, Check Manual!</find>
       <find>clientOperationHandler</find>
+      <find>OrcaClient</find>
+      <find>e.get</find>
+      <find>e.getM</find>
+      <find>e.getS</find>
+      <find>locali</find>
+      <find>exceptionAs</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -244,13 +260,13 @@
       <list>
         <option value="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
         <option value="$PROJECT_DIR$/src/DictionaryClient.fxml" />
-        <option value="$PROJECT_DIR$/src/OrcaDictionary.java" />
         <option value="$PROJECT_DIR$/client_config.json" />
         <option value="$PROJECT_DIR$/src/DictionaryServer.fxml" />
         <option value="$PROJECT_DIR$/src/DictionaryClientGUIConrtoller.java" />
         <option value="$PROJECT_DIR$/src/DictionaryClientGUIController.java" />
         <option value="$PROJECT_DIR$/src/OrcaLoger.java" />
         <option value="$PROJECT_DIR$/src/DictionaryServerGUIController.java" />
+        <option value="$PROJECT_DIR$/src/OrcaDictionary.java" />
         <option value="$PROJECT_DIR$/src/DictionaryServer.java" />
         <option value="$PROJECT_DIR$/src/DictionaryClient.java" />
       </list>
@@ -262,10 +278,10 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="y" value="22" />
     <option name="width" value="1680" />
-    <option name="height" value="963" />
+    <option name="height" value="958" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -327,7 +343,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536017791601" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536023328446" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -472,12 +488,12 @@
       <workItem from="1535847670030" duration="43000" />
       <workItem from="1535847743990" duration="16898000" />
       <workItem from="1535865780027" duration="249000" />
-      <workItem from="1535866112722" duration="46007000" />
+      <workItem from="1535866112722" duration="49133000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64139000" />
+    <option name="totallyTimeSpent" value="67265000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -489,7 +505,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1680" height="962" extended-state="6" />
+    <frame x="0" y="22" width="1680" height="958" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22283272" />
@@ -501,7 +517,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4993895" visible="true" weight="0.2" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4993895" visible="true" weight="0.20092379" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.27511415" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -678,18 +694,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/OrcaDictionary.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-243">
-          <caret line="30" column="33" lean-forward="true" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2019#2020#0" expanded="true" />
-            <element signature="e#2063#2064#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/DictionaryClientGUIController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="233">
@@ -706,8 +710,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DictionaryServerGUIController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="44" column="39" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="39" />
+        <state relative-caret-position="352">
+          <caret line="171" column="35" selection-start-line="171" selection-end-line="172" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#527#528#0" expanded="true" />
@@ -726,10 +730,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/OrcaDictionary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="46" column="34" lean-forward="true" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2019#2020#0" expanded="true" />
+            <element signature="e#2063#2064#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/DictionaryServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="891">
-          <caret line="65" column="37" lean-forward="true" selection-start-line="65" selection-start-column="37" selection-end-line="65" selection-end-column="37" />
+        <state relative-caret-position="204">
+          <caret line="242" column="87" selection-start-line="242" selection-start-column="87" selection-end-line="242" selection-end-column="87" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1070#1071#0" expanded="true" />
@@ -744,8 +760,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DictionaryClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="319" column="159" selection-start-line="319" selection-start-column="159" selection-end-line="319" selection-end-column="159" />
+        <state relative-caret-position="151">
+          <caret line="187" column="105" lean-forward="true" selection-start-line="187" selection-start-column="105" selection-end-line="187" selection-end-column="105" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#895#896#0" expanded="true" />

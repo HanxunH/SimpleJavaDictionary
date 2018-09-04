@@ -52,7 +52,7 @@ public class DictionaryServer extends Application{
         catch(IOException i) {
             loger.severe(i.getMessage());
         }catch (Exception e){
-            loger.severe(e.getMessage());
+            loger.severe(e.getClass().getSimpleName()+": "+e.getMessage());
         }
     }
 
@@ -184,9 +184,9 @@ public class DictionaryServer extends Application{
                 outputStream.close();
 
             }catch (Exception e) {
-                loger.severe(e.getMessage());
+                loger.severe(e.getClass().getSimpleName()+": "+e.getMessage());
             }finally {
-                loger.info("ClientID("+clientID+") Close Client");
+                loger.info("ClientID(" + clientID + ") Close Client");
                 updateUserCounter(userCounter-1);
                 if (socket != null) {
                     try {
@@ -203,7 +203,7 @@ public class DictionaryServer extends Application{
 
 
     public static boolean checkNextArgumentStatus(String[] args, int i){
-        if(i+1<args.length && args[i+1] == null){
+        if(i+1>=args.length || args[i+1] == null){
             loger.severe("Bad argument, Check Manual!");
             return false;
         }
@@ -219,7 +219,9 @@ public class DictionaryServer extends Application{
                 defaultPort = jsonObject.getInt("server_port");
             }
         }catch (Exception e){
-            loger.severe(e.getMessage());
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            loger.severe(e.getClass().getSimpleName()+": "+e.getMessage());
         }
     }
 
@@ -233,7 +235,14 @@ public class DictionaryServer extends Application{
             }
             if(args[i].equals("-p")){
                 if(checkNextArgumentStatus(args,i)){
-                    defaultPort = Integer.parseInt(args[i+1]);
+                    try{
+                        defaultPort = Integer.parseInt(args[i+1]);
+                    }catch (Exception e){
+                        StringWriter sw = new StringWriter();
+                        e.printStackTrace(new PrintWriter(sw));
+                        loger.severe(e.getClass().getSimpleName()+": "+e.getMessage());
+                        loger.severe("Bad argument, Check Manual!");
+                    }
                 }
             }
             if(args[i].equals("-gui")){

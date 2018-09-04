@@ -174,7 +174,7 @@ public class DictionaryClient extends Application {
             return sr;
         }
         catch (Exception e) {
-            loger.severe(e.getMessage());
+            loger.severe(e.getClass().getSimpleName()+": "+e.getMessage());
             throw e;
         }
     }
@@ -185,7 +185,7 @@ public class DictionaryClient extends Application {
         Map<String, String> map = new HashMap<String, String>();
         /* Add Operation */
         if(op == OrcaDictionary.dictionaryOperation.ADD){
-            if(op_word==null && op_word_meaning==null){
+            if(op_word==null && op_word_meaning==null && !op_word.equals("") && !op_word_meaning.equals("")){
                 loger.severe("Not enough arguments for Add operation");
             }else{
                 map.put("operation","ADD");
@@ -233,8 +233,9 @@ public class DictionaryClient extends Application {
     }
 
     public static boolean checkNextArgumentStatus(String[] args, int i){
-        if(i+1<args.length && args[i+1] == null){
+        if(i+1>=args.length || args[i+1] == null){
             loger.severe("Bad argument, Check Manual!");
+            System.exit(0);
             return false;
         }
         return true;
@@ -252,7 +253,7 @@ public class DictionaryClient extends Application {
                 defaultPort = jsonObject.getInt("server_port");
             }
         }catch (Exception e){
-            loger.severe(e.getMessage());
+            loger.severe(e.getClass().getSimpleName()+": "+e.getMessage());
         }
     }
 
@@ -267,8 +268,13 @@ public class DictionaryClient extends Application {
         for(int i=0; i<args.length; i++){
             if(args[i].equals("-test")){
                 if(checkNextArgumentStatus(args,i)){
-                    isTesting = true;
-                    deleyMillSec = Integer.valueOf(args[i+1]);
+                    try{
+                        isTesting = true;
+                        deleyMillSec = Integer.valueOf(args[i+1]);
+                    }catch (Exception e){
+                        loger.severe(e.getClass().getSimpleName()+": "+e.getMessage());
+                        loger.severe("Bad argument, Check Manual!");
+                    }
                 }
             }
             if(args[i].equals("-a")){
@@ -278,7 +284,12 @@ public class DictionaryClient extends Application {
             }
             if(args[i].equals("-p")){
                 if(checkNextArgumentStatus(args,i)){
-                    defaultPort = Integer.parseInt(args[i+1]);
+                    try{
+                        defaultPort = Integer.parseInt(args[i+1]);
+                    }catch (Exception e){
+                        loger.severe(e.getClass().getSimpleName()+": "+e.getMessage());
+                        loger.severe("Bad argument, Check Manual!");
+                    }
                 }
             }
             if(args[i].equals("-config")){
@@ -297,6 +308,9 @@ public class DictionaryClient extends Application {
                         op = OrcaDictionary.dictionaryOperation.LOOKUP;
                     }else if (arg_operation.equals("update")){
                         op = OrcaDictionary.dictionaryOperation.UPDATE;
+                    }else{
+                        loger.severe("Bad argument, Check Manual!");
+                        System.exit(0);
                     }
                     if(checkNextArgumentStatus(args,i+1)) {
                         op_word = args[i+2];
@@ -317,12 +331,13 @@ public class DictionaryClient extends Application {
                 if(sr.getResponse_code() != 200){
                     loger.warning("Status: " + sr.operation_status + " -Message: " + sr.getError_message());
                 }else{
-                    loger.info("Status: " + sr.operation_status + " -Operation: " + OrcaDictionary.dictionaryOperation.getString(op)+ " -Word: " + op_word + " -Meaning: " + op_word_meaning);
+                    loger.info("Status: " + sr.operation_status + " -Operation: " + OrcaDictionary.dictionaryOperation.getString(op)+ " -Word: " + sr.getOp_word() + " -Meaning: " + sr.getOp_word_meaning());
                 }
             }catch (Exception e){
-                loger.severe(e.getMessage());
+                loger.severe(e.getClass().getSimpleName()+": "+e.getMessage());
             }
         }
+        System.exit(0);
     }
 
     /* JAVAFX */

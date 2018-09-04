@@ -42,11 +42,16 @@ public class OrcaDictionary {
     public OrcaDictionary(){
         try
         {
-            FileInputStream fis = new FileInputStream("orca.dictionary");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            dictionary = (HashMap) ois.readObject();
-            ois.close();
-            fis.close();
+            File file = new File("orca.dictionary");
+            if(file.exists()){
+                FileInputStream fis = new FileInputStream("orca.dictionary");
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                dictionary = (HashMap) ois.readObject();
+                ois.close();
+                fis.close();
+            }else{
+                file.createNewFile();
+            }
         }catch(Exception e) {
             loger.severe(e.getMessage());
         }
