@@ -3,9 +3,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.event.*;
-import tray.animations.AnimationType;
-import tray.notification.*;
-
 import java.util.Optional;
 
 
@@ -79,7 +76,7 @@ public class DictionaryClientGUIController {
                 showAlert(AlertType.ERROR,"OrcaDictionaryClient","Server Error",e.getMessage());
             }
         }else{
-            showAlert(AlertType.WARNING,"OrcaDictionaryClient","TextFiled and TextArea are Empty","ADD: Please input a word and its meaning.");
+            showAlert(AlertType.WARNING,"OrcaDictionaryClient","TextFiled or TextArea are Empty","ADD: Please input a word and its meaning.");
         }
     }
 

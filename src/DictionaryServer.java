@@ -20,7 +20,7 @@ public class DictionaryServer extends Application{
     private static Logger loger = logHandler.getLogger();
     private static ServerSocket serverSocket = null;
     private static DictionaryServer server = new DictionaryServer();
-    private static OrcaDictionary dictionary = new OrcaDictionary();
+    private static OrcaDictionary dictionary = new OrcaDictionaryHashMap();
     private static final Object syncObject = new Object();
     public static final String version_String = "V 1.01";
     public static final String author_String = "HanxunHuang(LemonBear)\n" + "https://github.com/HanxunHuangLemonBear";
@@ -82,7 +82,7 @@ public class DictionaryServer extends Application{
                     map.put("operation_status","success");
                     map.put("op_word",op_word);
                     map.put("op_word_meaning",op_word_meaning);
-                    dictionary.saveToFile();
+                    dictionary.save();
                 }
 
             }else if(op == OrcaDictionary.dictionaryOperation.DELETE){
@@ -100,7 +100,7 @@ public class DictionaryServer extends Application{
                     map.put("response","true");
                     map.put("operation","DELETE");
                     map.put("op_word",op_word);
-                    dictionary.saveToFile();
+                    dictionary.save();
                 }
 
             }else if(op == OrcaDictionary.dictionaryOperation.LOOKUP){
@@ -134,7 +134,7 @@ public class DictionaryServer extends Application{
                     map.put("operation_status","success");
                     map.put("op_word",op_word);
                     map.put("op_word_meaning",op_word_meaning);
-                    dictionary.saveToFile();
+                    dictionary.save();
                 }
 
             }else if(op == OrcaDictionary.dictionaryOperation.TEST){

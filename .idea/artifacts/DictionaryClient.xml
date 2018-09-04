@@ -1,13 +1,11 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="project1Client">
-    <output-path>$PROJECT_DIR$/out/artifacts/project1Client</output-path>
-    <root id="archive" name="project1Client.jar">
+  <artifact type="jar" name="DictionaryClient">
+    <output-path>$PROJECT_DIR$/out/artifacts/DictionaryClient</output-path>
+    <root id="archive" name="DictionaryClient.jar">
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/src/client/META-INF/MANIFEST.MF" />
       </element>
       <element id="module-output" name="project1" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/TrayNotification.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/Enzo-0.3.6.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/java-json.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/json-simple-1.1.1.jar" path-in-jar="/" />
     </root>
