@@ -1,59 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-
-<AnchorPane prefHeight="365.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DictionaryServerGUIController">
-   <children>
-      <MenuBar prefHeight="16.0" prefWidth="600.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="OrcaDictionaryServer">
-            <items>
-              <MenuItem fx:id="menuItem_version" mnemonicParsing="false" onAction="#menuItem_version_Action" text="Version" />
-                  <MenuItem fx:id="menuItem_exit" mnemonicParsing="false" onAction="#menuItem_exit_Action" text="Quit" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <Pane layoutY="29.0" prefHeight="336.0" prefWidth="410.0">
-         <children>
-            <TextArea fx:id="server_console_TextArea" editable="false" layoutY="30.0" prefHeight="306.0" prefWidth="410.0" />
-            <Label layoutX="14.0" layoutY="6.0" prefHeight="15.0" prefWidth="122.0" text="Connected Client: ">
-               <font>
-                  <Font name="Apple SD GothicNeo ExtraBold" size="15.0" />
-               </font>
-            </Label>
-            <Label fx:id="user_Counter_Label" layoutX="136.0" layoutY="6.0" text="0">
-               <font>
-                  <Font name="Apple SD GothicNeo ExtraBold" size="15.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <Pane layoutX="409.0" layoutY="28.0" prefHeight="336.0" prefWidth="190.0">
-         <children>
-            <TextField fx:id="port_number_TextField" layoutX="12.0" layoutY="33.0" />
-            <Label layoutX="10.0" layoutY="13.0" text="Port Number: ">
-               <font>
-                  <Font name="Apple SD GothicNeo ExtraBold" size="15.0" />
-               </font>
-            </Label>
-            <Button fx:id="start_Button" layoutX="11.0" layoutY="251.0" mnemonicParsing="false" onAction="#start_Button_Action" prefHeight="27.0" prefWidth="167.0" text="Start The Server">
-               <font>
-                  <Font name="Apple SD GothicNeo ExtraBold" size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="stop_Button" layoutX="12.0" layoutY="285.0" mnemonicParsing="false" onAction="#stop_Button_Action" prefHeight="27.0" prefWidth="167.0" text="Stop The Server">
-               <font>
-                  <Font name="Apple SD GothicNeo ExtraBold" size="15.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
-   </children>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.*?>
+<AnchorPane prefHeight="365.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="DictionaryServerGUIController">
+    <children>
+        <MenuBar prefHeight="16.0" prefWidth="600.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="OrcaDictionaryServer">
+                    <items>
+                        <MenuItem fx:id="menuItem_version" mnemonicParsing="false" onAction="#menuItem_version_Action"
+                                  text="Version"/>
+                        <MenuItem fx:id="menuItem_exit" mnemonicParsing="false" onAction="#menuItem_exit_Action"
+                                  text="Quit"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Pane layoutY="29.0" prefHeight="336.0" prefWidth="410.0">
+            <children>
+                <TextArea fx:id="server_console_TextArea" editable="false" layoutY="30.0" prefHeight="306.0"
+                          prefWidth="410.0"/>
+                <Label layoutX="14.0" layoutY="6.0" prefHeight="15.0" prefWidth="122.0" text="Connected Client: ">
+                    <font>
+                        <Font name="Apple SD GothicNeo ExtraBold" size="15.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="user_Counter_Label" layoutX="136.0" layoutY="6.0" text="0">
+                    <font>
+                        <Font name="Apple SD GothicNeo ExtraBold" size="15.0"/>
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+        <Pane layoutX="409.0" layoutY="28.0" prefHeight="336.0" prefWidth="190.0">
+            <children>
+                <TextField fx:id="port_number_TextField" layoutX="12.0" layoutY="33.0"/>
+                <Label layoutX="10.0" layoutY="13.0" text="Port Number: ">
+                    <font>
+                        <Font name="Apple SD GothicNeo ExtraBold" size="15.0"/>
+                    </font>
+                </Label>
+                <Button fx:id="start_Button" layoutX="11.0" layoutY="251.0" mnemonicParsing="false"
+                        onAction="#start_Button_Action" prefHeight="27.0" prefWidth="167.0" text="Start The Server">
+                    <font>
+                        <Font name="Apple SD GothicNeo ExtraBold" size="15.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="stop_Button" layoutX="12.0" layoutY="285.0" mnemonicParsing="false"
+                        onAction="#stop_Button_Action" prefHeight="27.0" prefWidth="167.0" text="Stop The Server">
+                    <font>
+                        <Font name="Apple SD GothicNeo ExtraBold" size="15.0"/>
+                    </font>
+                </Button>
+            </children>
+        </Pane>
+    </children>
 </AnchorPane>

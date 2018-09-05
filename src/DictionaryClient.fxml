@@ -1,85 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DictionaryClientGUIController">
-   <children>
-      <MenuBar layoutX="14.0" layoutY="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="OrcaDictionary">
-            <items>
-                  <MenuItem fx:id="menuItem_version" mnemonicParsing="false" onAction="#menuItem_version_Action" text="Version" />
-              <MenuItem fx:id="menuItem_exit" mnemonicParsing="false" onAction="#menuItem_exit_Action" text="Quit" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <Pane layoutX="14.0" layoutY="29.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="29.0">
-         <children>
-            <Button fx:id="search_Button" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#search_Button_Action" prefHeight="48.0" prefWidth="168.0" text="Search">
-               <font>
-                  <Font name="Apple SD GothicNeo ExtraBold" size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="add_Button" layoutX="14.0" layoutY="144.0" mnemonicParsing="false" onAction="#add_Button_Action" prefHeight="48.0" prefWidth="168.0" text="Add">
-               <font>
-                  <Font name="Apple SD GothicNeo ExtraBold" size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="delete_Button" layoutX="14.0" layoutY="79.0" mnemonicParsing="false" onAction="#delete_Button_Action" prefHeight="48.0" prefWidth="168.0" text="Delete">
-               <font>
-                  <Font name="Apple SD GothicNeo ExtraBold" size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="test_connection_Button" layoutX="14.0" layoutY="205.0" mnemonicParsing="false" onAction="#test_connection_Button_Action" prefHeight="48.0" prefWidth="168.0" text="Test Connection">
-               <font>
-                  <Font name="Apple SD GothicNeo ExtraBold" size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="clear_Button" layoutX="14.0" layoutY="267.0" mnemonicParsing="false" onAction="#clear_Button_Action" prefHeight="48.0" prefWidth="168.0" text="Clear">
-               <font>
-                  <Font name="Apple SD GothicNeo ExtraBold" size="15.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
-      <Pane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0">
-         <children>
-            <TextField fx:id="op_word_TextField" layoutX="16.0" layoutY="36.0" prefHeight="31.0" prefWidth="367.0">
-               <font>
-                  <Font name="Apple SD GothicNeo ExtraBold" size="18.0" />
-               </font>
-            </TextField>
-            <TextArea fx:id="op_word_meaning_TextArea" layoutX="16.0" layoutY="104.0" prefHeight="111.0" prefWidth="368.0">
-               <font>
-                  <Font name="Apple SD GothicNeo ExtraBold" size="18.0" />
-               </font>
-            </TextArea>
-            <TextArea fx:id="response_TextArea" editable="false" layoutX="14.0" layoutY="241.0" prefHeight="85.0" prefWidth="368.0" />
-            <Label layoutX="20.0" layoutY="12.0" prefHeight="18.0" prefWidth="118.0" text="Word:">
-               <font>
-                  <Font name="Apple SD GothicNeo ExtraBold" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="20.0" layoutY="82.0" prefHeight="17.0" prefWidth="112.0" text="Defination:">
-               <font>
-                  <Font name="Apple SD GothicNeo ExtraBold" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="22.0" layoutY="222.0" prefHeight="17.0" prefWidth="112.0" text="Server Response: ">
-               <font>
-                  <Font name="Apple SD GothicNeo ExtraBold" size="14.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-   </children>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="DictionaryClientGUIController">
+    <children>
+        <MenuBar layoutX="14.0" layoutY="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                 AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="OrcaDictionary">
+                    <items>
+                        <MenuItem fx:id="menuItem_version" mnemonicParsing="false" onAction="#menuItem_version_Action"
+                                  text="Version"/>
+                        <MenuItem fx:id="menuItem_exit" mnemonicParsing="false" onAction="#menuItem_exit_Action"
+                                  text="Quit"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Pane layoutX="14.0" layoutY="29.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
+              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="29.0">
+            <children>
+                <Button fx:id="search_Button" layoutX="14.0" layoutY="14.0" mnemonicParsing="false"
+                        onAction="#search_Button_Action" prefHeight="48.0" prefWidth="168.0" text="Search">
+                    <font>
+                        <Font name="Apple SD GothicNeo ExtraBold" size="15.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="add_Button" layoutX="14.0" layoutY="144.0" mnemonicParsing="false"
+                        onAction="#add_Button_Action" prefHeight="48.0" prefWidth="168.0" text="Add">
+                    <font>
+                        <Font name="Apple SD GothicNeo ExtraBold" size="15.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="delete_Button" layoutX="14.0" layoutY="79.0" mnemonicParsing="false"
+                        onAction="#delete_Button_Action" prefHeight="48.0" prefWidth="168.0" text="Delete">
+                    <font>
+                        <Font name="Apple SD GothicNeo ExtraBold" size="15.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="test_connection_Button" layoutX="14.0" layoutY="205.0" mnemonicParsing="false"
+                        onAction="#test_connection_Button_Action" prefHeight="48.0" prefWidth="168.0"
+                        text="Test Connection">
+                    <font>
+                        <Font name="Apple SD GothicNeo ExtraBold" size="15.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="clear_Button" layoutX="14.0" layoutY="267.0" mnemonicParsing="false"
+                        onAction="#clear_Button_Action" prefHeight="48.0" prefWidth="168.0" text="Clear">
+                    <font>
+                        <Font name="Apple SD GothicNeo ExtraBold" size="15.0"/>
+                    </font>
+                </Button>
+            </children>
+        </Pane>
+        <Pane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0"
+              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0">
+            <children>
+                <TextField fx:id="op_word_TextField" layoutX="16.0" layoutY="36.0" prefHeight="31.0" prefWidth="367.0">
+                    <font>
+                        <Font name="Apple SD GothicNeo ExtraBold" size="18.0"/>
+                    </font>
+                </TextField>
+                <TextArea fx:id="op_word_meaning_TextArea" layoutX="16.0" layoutY="104.0" prefHeight="111.0"
+                          prefWidth="368.0">
+                    <font>
+                        <Font name="Apple SD GothicNeo ExtraBold" size="18.0"/>
+                    </font>
+                </TextArea>
+                <TextArea fx:id="response_TextArea" editable="false" layoutX="14.0" layoutY="241.0" prefHeight="85.0"
+                          prefWidth="368.0"/>
+                <Label layoutX="20.0" layoutY="12.0" prefHeight="18.0" prefWidth="118.0" text="Word:">
+                    <font>
+                        <Font name="Apple SD GothicNeo ExtraBold" size="14.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="20.0" layoutY="82.0" prefHeight="17.0" prefWidth="112.0" text="Defination:">
+                    <font>
+                        <Font name="Apple SD GothicNeo ExtraBold" size="14.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="22.0" layoutY="222.0" prefHeight="17.0" prefWidth="112.0" text="Server Response: ">
+                    <font>
+                        <Font name="Apple SD GothicNeo ExtraBold" size="14.0"/>
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+    </children>
 </AnchorPane>

@@ -1,16 +1,35 @@
+/***
+ * @project project1
+ * @author HanxunHuang ON 9/4/18
+ * COMP90015 Distributed Systems
+ * Hanxun Huang
+ * hanxunh@student.unimelb.edu.au
+ * Student ID: 975781
+ ***/
+
+import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.event.*;
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.logging.*;
-import java.text.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import javafx.concurrent.*;
-import javafx.application.Platform;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.FileHandler;
+import java.util.logging.Formatter;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
+
+
 public class DictionaryServerGUIController {
     @FXML
     private TextField port_number_TextField;
@@ -36,32 +55,32 @@ public class DictionaryServerGUIController {
     private String logFileString = "server.log";
     private static boolean isTailLogStarted = false;
     private static OrcaServerLogReaderThread orcaServerLogReaderThread = null;
+
     @FXML
-    public void menuItem_exit_Action(ActionEvent event){
+    public void menuItem_exit_Action(ActionEvent event) {
         System.exit(0);
     }
 
     @FXML
-    public void menuItem_version_Action(ActionEvent event){
-        showAlert(AlertType.INFORMATION,"OrcaDictionaryServer", server.version_String,server.author_String);
+    public void menuItem_version_Action(ActionEvent event) {
+        showAlert(AlertType.INFORMATION, "OrcaDictionaryServer", server.version_String, server.author_String);
     }
 
     @FXML
-    public void start_Button_Action(ActionEvent event){
-
-        if(isStarted){
-            showAlert(AlertType.ERROR,"OrcaDictionaryServer","Server Already Running","Stop Server first to start new one.");
+    public void start_Button_Action(ActionEvent event) {
+        if (isStarted) {
+            showAlert(AlertType.ERROR, "OrcaDictionaryServer", "Server Already Running", "Stop Server first to start new one.");
             return;
         }
-        if(port_number_TextField.getText().equals("")){
-            showAlert(AlertType.INFORMATION,"OrcaDictionaryServer","Port Number Not Set","Running on default port: 6666");
-        }else{
+        if (port_number_TextField.getText().equals("")) {
+            showAlert(AlertType.INFORMATION, "OrcaDictionaryServer", "Port Number Not Set", "Running on default port: 6666");
+        } else {
             setPortNumber();
         }
         serverThread = new OrcaServerThread();
         serverThread.start();
         isStarted = true;
-        if(isTailLogStarted==false) {
+        if (isTailLogStarted == false) {
             orcaServerLogReaderThread = new OrcaServerLogReaderThread();
             orcaServerLogReaderThread.start();
             Task task = new Task<Void>() {
@@ -86,9 +105,9 @@ public class DictionaryServerGUIController {
     }
 
     @FXML
-    public void stop_Button_Action(ActionEvent event){
-        if(!isStarted){
-            showAlert(AlertType.ERROR,"OrcaDictionaryServer","Server Already Stoped","");
+    public void stop_Button_Action(ActionEvent event) {
+        if (!isStarted) {
+            showAlert(AlertType.ERROR, "OrcaDictionaryServer", "Server Already Stoped", "");
             return;
         }
         serverThread.shutdown();
@@ -106,24 +125,24 @@ public class DictionaryServerGUIController {
 
         public void run() {
             running.set(true);
-            try{
+            try {
                 String line;
                 File file = new File(logFileString);
-                while (running.get() && file.exists() == false){
+                while (running.get() && file.exists() == false) {
                     Thread.currentThread().sleep(100);
                 }
                 FileReader fr = new FileReader(logFileString);
                 BufferedReader br = new BufferedReader(fr);
-                while(running.get()){
+                while (running.get()) {
                     line = br.readLine();
-                    if(line==null){
+                    if (line == null) {
                         Thread.currentThread().sleep(300);
-                    }else{
+                    } else {
                         line = line + "\n";
                         server_console_TextArea.appendText(line);
                     }
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -133,6 +152,7 @@ public class DictionaryServerGUIController {
 
         private ServerSocket serverSocket = null;
         private final AtomicBoolean running = new AtomicBoolean(true);
+
         public OrcaServerThread() {
             serverSocket = server.getServerSocket();
         }
@@ -140,16 +160,16 @@ public class DictionaryServerGUIController {
         public void shutdown() {
             Thread.currentThread().interrupt();
             running.set(false);
-            try{
-                if (server != null){
+            try {
+                if (server != null) {
                     serverSocket.close();
                 }
-            } catch (IOException ignored){
+            } catch (IOException ignored) {
 
             }
         }
 
-        class MyFormatter extends Formatter{
+        class MyFormatter extends Formatter {
 
             /* (non-Javadoc)
              * @see java.util.logging.Formatter#format(java.util.logging.LogRecord)
@@ -160,27 +180,27 @@ public class DictionaryServerGUIController {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(record.getMillis());
                 StringBuilder sb = new StringBuilder();
-                sb.append("["+formatter.format(calendar.getTime())+"]");
-                sb.append("["+record.getLevel()+"]").append(" :");
+                sb.append("[" + formatter.format(calendar.getTime()) + "]");
+                sb.append("[" + record.getLevel() + "]").append(" :");
                 sb.append(record.getMessage()).append('\n');
                 return sb.toString();
             }
         }
 
         public void run() {
-            try{
+            try {
                 File file = new File(logFileString);
                 file.deleteOnExit();
-                FileHandler fh = new FileHandler(logFileString,true);
+                FileHandler fh = new FileHandler(logFileString, true);
                 fh.setFormatter(new MyFormatter());
                 loger.addHandler(fh);
                 loger.setUseParentHandlers(true);
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
             try {
                 serverSocket = new ServerSocket(default_port);
-                loger.info("Server started on port: "+ String.valueOf(default_port));
+                loger.info("Server started on port: " + String.valueOf(default_port));
                 running.set(true);
                 while (running.get()) {
                     Socket socket = serverSocket.accept();
@@ -198,7 +218,7 @@ public class DictionaryServerGUIController {
 
     }
 
-    private void showAlert(AlertType type, String title, String header, String message){
+    private void showAlert(AlertType type, String title, String header, String message) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(header);
@@ -206,11 +226,11 @@ public class DictionaryServerGUIController {
         alert.showAndWait();
     }
 
-    private void setPortNumber(){
+    private void setPortNumber() {
         this.default_port = Integer.valueOf(port_number_TextField.getText());
     }
 
-    private void setUserCounter(){
+    private void setUserCounter() {
         this.user_Counter_Label.setText(String.valueOf(server.getUserCounter()));
     }
 }
